@@ -34,6 +34,7 @@ var getCityData = function() {
                     console.log (weatherIcon);
 
                     displayRecords (details.name, details.main.temp, details.main.humidity, details.wind.speed, weatherIcon);
+                    getUVIndexData (details.coord.lat, details.coord.lon)
                 })
             }
         })
@@ -42,7 +43,27 @@ var getCityData = function() {
         })
 }
 
-//create a function to display the records 
+// Function to get the UVIndex Data
+
+var getUVIndexData = function (lat, lon) {
+    var oneCallAPI = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude=daily&appid=" + APIkey;
+    console.log (oneCallAPI);
+    //debugger;
+    fetch (oneCallAPI)
+        .then(function(response) {
+            if (response.ok) {
+                response.json().then(function (details){
+                    console.log (details.current.uvi);// uvi
+                    displayUVIndexData (details.current.uvi)
+                })
+            }
+        })
+        .catch(function(error) {
+            alert("Unable to connect");
+        })
+}
+
+//Function to display the records minus the UVIndex
 
 var displayRecords = function(name,temp,humidity,windSpeed,weatherIcon){
     var currentDate = moment().format("MMM Do YYYY");
@@ -50,6 +71,15 @@ var displayRecords = function(name,temp,humidity,windSpeed,weatherIcon){
     currentTemperature.innerHTML = "Temperature: " + (temp) + " " + "°C";
     currentHumidity.innerHTML = "Humidity: " + (humidity)+ " " + "%";
     currentWS.innerHTML = "Wind Speed: " + (windSpeed)+ " " + "Km/h";
+}
+
+//Create a function to display Uv index similar to previous functions 
+
+var displayUVIndexData = function (uvi) {
+    uvIndex.innerHTML = (uvi);
+    if (uvi = 0 || 1 || 2) {
+        uvIndex.className = "bg-gradient bg-success"
+    }
 }
 
 //create function to click on existing list to display data again
@@ -103,4 +133,5 @@ var saveCity = function (city) {
 
 //Event Listeners and calling Functions 
 searchCityButton.addEventListener("click",getCityData);
+// searchCityButton.addEventListener("click",getUVIndexData);
 existingList ();
