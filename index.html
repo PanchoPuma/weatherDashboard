@@ -36,13 +36,61 @@
 
   <body>
     <header class="container-fluid">
-                <div class="row navbar bg-primary bg-gradient text-white text-center">
-                    <h1>Weather Dashboard</h1>
-                </div>
+        <div class="row navbar bg-primary bg-gradient text-white text-center">
+            <h1>Weather Dashboard</h1>
+        </div>
     </header>
     <main class="container">
-        
-    
+        <section class="row content-row">
+        <!--First half starts-->
+            <section class="pt-3 col-12  bg-gradient bg-light border border-3 col-md-3 mt-3 ">
+                <h3>Search for a city:</h3>
+                <!--Search form-->
+                <form class="form-group mb-2 input-group  ">
+                    <input type="text" class="form-control" id="searchCityForm" placeholder="Quito">
+                </form>
+                <!--Search button-->
+                <button class="btn mb-2 btn-secondary btn-sm col-12 " id="searchCityBtn"> Search </button>
+                <!-- Seach History -->
+                <div class="card">
+                    <ul class="list-group" id="previousSearchHistory">                   
+                    </ul>
+                </div>
+            </section>
+        <!--First half ends-->
+        <!--Second half starts-->
+            <section id="weatherInfo" class="col-md-9 col-12">
+            <!--City Information-->
+                <div class="row">
+                    <div class="col-12 my-3 mx-3 px-3 py-3 border border-3 ">
+                        <h2 id="currentCity">City Information</h2>
+                        <p class="mb-1.5" id="currentTemperature" >Temperature:</p>
+                        <p class="mb-1.5" id="currentHumidity"> Humidity</p>
+                        <p class="mb-1.5" id="currentWS">Wind Speed: </p>
+                        <p class="mb-0" id="uvIndex" >UV index:</p>
+                    </div>
+                </div>
+            <!--5 Day Forecast-->
+                <div class="row ">
+                    <div class="col-12 my-0 mx-3 px-3 py-3 border border-3 ">
+                         <h3>5-Day Forecast</h3>
+                        <div class="row" >
+                            <div class="col-2" id="5DayForecast">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Date:</h5>
+                                        <i class="fas fa-cloud-sun"></i>
+                                        <p class="card-text">Temperature: </p>
+                                        <p class="card-text">Humidity: </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <!--Second half ends-->
+        </section>
     </main>
     <!--JQuery-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
