@@ -28,6 +28,7 @@ var existingList = function () {
 
         var cityButtonLoading = document.createElement("button");
         cityButtonLoading.textContent = (storedCityList[i]);
+        cityButtonLoading.className = "my-1"
         previousSearchHistory.appendChild(cityButtonLoading);
 
         }
@@ -62,6 +63,7 @@ var getCityData = function() {
         .catch(function(error) {
             alert("Unable to connect");
         })
+        $("#searchCityForm").val("")
 }
 
 //Function to store the city name 
@@ -117,22 +119,16 @@ var displayRecords = function(name,temp,humidity,windSpeed,weatherIcon){
 
 //Function to display Uv index similar to previous functions 
 var displayUVIndexData = function (uvi) {
-    uvIndex.innerHTML = (uvi);
-
-
-    //FIND A WaY TO CLEAR THE COLOURS PERHAPS USING SWITCH!!!!!!!!!!!!!!! 
-    //or look at comments from previus homework
-
-
-    if (uvi === 0 || 1 || 2) {
+    uvIndex.innerHTML = parseFloat(uvi);
+    if (uvi >= 0 && uvi <= 2) {
         uvIndex.className = "col-md-1 px-0 mx-0 my-0 green"
-    } else if (uvi === 3 || 4 || 5) {
-        uvIndex.className = "col-md-1 px-0 mx-0 my-0 yellow"
-    } else if (uvi === 6 || 7) {
-        uvIndex.className = "col-md-1 px-0 mx-0 my-0 orange" 
-    } else if (uvi === 8 || 9) {
-        uvIndex.className = "col-md-1 px-0 mx-0 my-0 red"  
-    } else if (uvi >= 10) {
+    } else if (uvi >= 2.01 && uvi <= 5) {
+        uvIndex.className = "col-md-1 px-0 mx-0 my-0 yellow" 
+    } else if (uvi >= 5.01 && uvi <= 7) {
+        uvIndex.className = "col-md-1 px-0 mx-0 my-0 orange"  
+    } else if (uvi >= 7.01 && uvi <= 10) {
+        uvIndex.className = "col-md-1 px-0 mx-0 my-0 red"
+    } else if (uvi >= 10.01) {
         uvIndex.className = "col-md-1 px-0 mx-0 my-0 red"
     }
 }
