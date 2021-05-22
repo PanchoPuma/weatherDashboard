@@ -1,12 +1,14 @@
 //Variables from the HTML
 var searchCityButton= document.querySelector("#searchCityButton")
+var previousSearchHistory= document.querySelector("#previousSearchHistory")
 
 // variables
 var APIkey = "b1d0aae8e0d8743f9981d6a87d77d2bb";
 var cityList = []
 
-//functions
+//ALL FUNCTIONS
 
+//Function to get city data
 var getCityData = function() {
     var city = $("#searchCityForm").val();
 
@@ -35,33 +37,53 @@ var getCityData = function() {
 
 //create a function to display the records 
 
-//create a function to load and display existing city names
+//Function to load and display existing city names
 
 var existingList = function () {
-    
-}
 
-//create a function to store the city name and display it in the list
-var saveCity = function (city) {
-        if (city === ""){
-            window.alert("Please enter a city name");
-        //debugger;
-        } else {
-           var existing = localStorage.getItem ("Cities");
-           console.log (existing)
-            if (existing === null) {
-                cityList = [];
-                } else {
-                cityList = JSON.parse(existing);
-                }
-           //debugger;
-           cityList.push (city);
-            localStorage.setItem ("Cities", JSON.stringify(cityList)) 
+    var storedCityList = localStorage.getItem("Cities");
+    storedCityList = JSON.parse(storedCityList);
+
+    console.log(storedCityList)
+    //debugger
+
+    if (storedCityList != null) {
+
+        for (var i = 0; i < storedCityList.length; i++) {
+
+        var cityButtonLoading = document.createElement("button");
+        cityButtonLoading.textContent = (storedCityList[i]);
+        previousSearchHistory.appendChild(cityButtonLoading);
+
         }
     }
+}
+
+//Function to store the city name 
+var saveCity = function (city) {
+    if (city === ""){
+        window.alert("Please enter a city name");
+    //debugger;
+    } else {
+        var existing = localStorage.getItem ("Cities");
+        console.log (existing)
+            if (existing === null) {
+                cityList = [];
+            } else {
+                cityList = JSON.parse(existing);
+            }
+            cityList.push (city);
+            localStorage.setItem ("Cities", JSON.stringify(cityList));
+            //debugger;
+            var cityButtonSaving = document.createElement("button");
+            cityButtonSaving.textContent = (city);
+            previousSearchHistory.appendChild(cityButtonSaving);
+    }
+}
 
 
 
 
 
 searchCityButton.addEventListener("click",getCityData);
+existingList ();
