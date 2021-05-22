@@ -13,6 +13,27 @@ var cityList = [];
 
 //ALL FUNCTIONS
 
+//Function to load and display existing city names
+var existingList = function () {
+
+    var storedCityList = localStorage.getItem("Cities");
+    storedCityList = JSON.parse(storedCityList);
+
+    console.log(storedCityList);
+    //debugger;
+
+    if (storedCityList != null) {
+
+        for (var i = 0; i < storedCityList.length; i++) {
+
+        var cityButtonLoading = document.createElement("button");
+        cityButtonLoading.textContent = (storedCityList[i]);
+        previousSearchHistory.appendChild(cityButtonLoading);
+
+        }
+    }
+}
+
 //Function to get city data
 var getCityData = function() {
     var city = $("#searchCityForm").val();
@@ -43,8 +64,30 @@ var getCityData = function() {
         })
 }
 
-// Function to get the UVIndex Data
+//Function to store the city name 
+var saveCity = function (city) {
+    if (city === ""){
+        window.alert("Please enter a city name");
+    //debugger;
+    } else {
+        var existing = localStorage.getItem ("Cities");
+        console.log (existing);
+            if (existing === null) {
+                cityList = [];
+            } else {
+                cityList = JSON.parse(existing);
+            }
+            cityList.push (city);
+            localStorage.setItem ("Cities", JSON.stringify(cityList));
+            //debugger;
+            var cityButtonSaving = document.createElement("button");
+            cityButtonSaving.textContent = (city);
+            cityButtonSaving.className = "my-1"
+            previousSearchHistory.appendChild(cityButtonSaving);
+    }
+}
 
+// Function to get the UVIndex Data
 var getUVIndexData = function (lat, lon) {
     var oneCallAPI = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude=daily&appid=" + APIkey;
     console.log (oneCallAPI);
@@ -64,7 +107,6 @@ var getUVIndexData = function (lat, lon) {
 }
 
 //Function to display the records minus the UVIndex
-
 var displayRecords = function(name,temp,humidity,windSpeed,weatherIcon){
     var currentDate = moment().format("MMM Do YYYY");
     currentCity.innerHTML = (name) + " - " + (currentDate) + " " + (weatherIcon);
@@ -73,60 +115,37 @@ var displayRecords = function(name,temp,humidity,windSpeed,weatherIcon){
     currentWS.innerHTML = "Wind Speed: " + (windSpeed)+ " " + "Km/h";
 }
 
-//Create a function to display Uv index similar to previous functions 
-
+//Function to display Uv index similar to previous functions 
 var displayUVIndexData = function (uvi) {
     uvIndex.innerHTML = (uvi);
-    if (uvi = 0 || 1 || 2) {
-        uvIndex.className = "bg-gradient bg-success"
+
+
+    //FIND A WaY TO CLEAR THE COLOURS PERHAPS USING SWITCH!!!!!!!!!!!!!!! 
+    //or look at comments from previus homework
+
+
+    if (uvi === 0 || 1 || 2) {
+        uvIndex.className = "col-md-1 px-0 mx-0 my-0 green"
+    } else if (uvi === 3 || 4 || 5) {
+        uvIndex.className = "col-md-1 px-0 mx-0 my-0 yellow"
+    } else if (uvi === 6 || 7) {
+        uvIndex.className = "col-md-1 px-0 mx-0 my-0 orange" 
+    } else if (uvi === 8 || 9) {
+        uvIndex.className = "col-md-1 px-0 mx-0 my-0 red"  
+    } else if (uvi >= 10) {
+        uvIndex.className = "col-md-1 px-0 mx-0 my-0 red"
     }
 }
 
-//create function to click on existing list to display data again
+
+// Create a function to display 5 day forecast similar to previous functions but miniaturaized!!!!!!!!!
+//Create function to click on existing list to display data again !!!!!!!!!!!!!
 
 
-//Function to load and display existing city names
-var existingList = function () {
 
-    var storedCityList = localStorage.getItem("Cities");
-    storedCityList = JSON.parse(storedCityList);
 
-    console.log(storedCityList);
-    //debugger;
 
-    if (storedCityList != null) {
 
-        for (var i = 0; i < storedCityList.length; i++) {
-
-        var cityButtonLoading = document.createElement("button");
-        cityButtonLoading.textContent = (storedCityList[i]);
-        previousSearchHistory.appendChild(cityButtonLoading);
-
-        }
-    }
-}
-
-//Function to store the city name 
-var saveCity = function (city) {
-    if (city === ""){
-        window.alert("Please enter a city name");
-    //debugger;
-    } else {
-        var existing = localStorage.getItem ("Cities");
-        console.log (existing);
-            if (existing === null) {
-                cityList = [];
-            } else {
-                cityList = JSON.parse(existing);
-            }
-            cityList.push (city);
-            localStorage.setItem ("Cities", JSON.stringify(cityList));
-            //debugger;
-            var cityButtonSaving = document.createElement("button");
-            cityButtonSaving.textContent = (city);
-            previousSearchHistory.appendChild(cityButtonSaving);
-    }
-}
 
 
 

@@ -7,3 +7,23 @@
 }
 
 /* initial  css */
+
+.green {
+    background-color: rgb(7, 224, 7);
+    text-align: center;
+}
+
+.yellow {
+    background-color: rgb(202, 224, 7);
+    text-align: center;
+}
+
+.orange {
+    background-color: rgb(224, 173, 7);
+    text-align: center;
+}
+
+.red {
+    background-color: rgb(224, 7, 7);
+    text-align: center;
+}
