@@ -1,10 +1,15 @@
 //Variables from the HTML
-var searchCityButton= document.querySelector("#searchCityButton")
-var previousSearchHistory= document.querySelector("#previousSearchHistory")
+var searchCityButton = document.querySelector("#searchCityButton");
+var previousSearchHistory = document.querySelector("#previousSearchHistory");
+var currentCity = document.querySelector("#currentCity");
+var currentTemperature = document.querySelector("#currentTemperature");
+var currentHumidity = document.querySelector("#currentHumidity");
+var currentWS = document.querySelector("#currentWS");
+var uvIndex = document.querySelector("#uvIndex");
 
 // variables
 var APIkey = "b1d0aae8e0d8743f9981d6a87d77d2bb";
-var cityList = []
+var cityList = [];
 
 //ALL FUNCTIONS
 
@@ -20,13 +25,13 @@ var getCityData = function() {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function (details){
-                    console.log (details)// all details
-                    console.log (details.name)// name of the city 
-                    console.log (details.main.temp) //current temperature
-                    console.log (details.main.humidity) //current Humidity
-                    console.log (details.wind.speed) //current Wind Speed
+                    console.log (details);// all details
+                    console.log (details.name);// name of the city 
+                    console.log (details.main.temp); //current temperature
+                    console.log (details.main.humidity);//current Humidity
+                    console.log (details.wind.speed); //current Wind Speed
 
-                    //insert call to function to display data with 4 parameters
+                    displayRecords (details.name, details.main.temp, details.main.humidity, details.wind.speed);
                 })
             }
         })
@@ -37,15 +42,23 @@ var getCityData = function() {
 
 //create a function to display the records 
 
-//Function to load and display existing city names
+var displayRecords = function(name,temp,humidity,windSpeed){
+    currentCity.innerHTML = (name);
+    currentTemperature.innerHTML = "Temperature: " + (temp) + " " + "degrees celsius";
+    currentHumidity.innerHTML = "Humidity: " + (humidity);
+    currentWS.innerHTML = "Wind Speed: " + (windSpeed);
+}
 
+//create function to click on existing list to display data again
+
+//Function to load and display existing city names
 var existingList = function () {
 
     var storedCityList = localStorage.getItem("Cities");
     storedCityList = JSON.parse(storedCityList);
 
-    console.log(storedCityList)
-    //debugger
+    console.log(storedCityList);
+    //debugger;
 
     if (storedCityList != null) {
 
@@ -66,7 +79,7 @@ var saveCity = function (city) {
     //debugger;
     } else {
         var existing = localStorage.getItem ("Cities");
-        console.log (existing)
+        console.log (existing);
             if (existing === null) {
                 cityList = [];
             } else {
@@ -84,6 +97,6 @@ var saveCity = function (city) {
 
 
 
-
+//Event Listeners and calling Functions 
 searchCityButton.addEventListener("click",getCityData);
 existingList ();
