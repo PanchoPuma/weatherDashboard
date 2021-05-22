@@ -19,7 +19,7 @@ var existingList = function () {
     var storedCityList = localStorage.getItem("Cities");
     storedCityList = JSON.parse(storedCityList);
 
-    console.log(storedCityList);
+   //console.log(storedCityList);
     //debugger;
 
     if (storedCityList != null) {
@@ -47,16 +47,18 @@ var getCityData = function() {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function (details){
-                    console.log (details);// all details
-                    console.log (details.name);// name of the city 
-                    console.log (details.main.temp); //current temperature
-                    console.log (details.main.humidity);//current Humidity
-                    console.log (details.wind.speed); //current Wind Speed
+                    // console.log (details);// all details
+                    // console.log (details.name);// name of the city 
+                    // console.log (details.main.temp); //current temperature
+                    // console.log (details.main.humidity);//current Humidity
+                    // console.log (details.wind.speed); //current Wind Speed
+                    // console.log (details.sys.country); //city's country
                     var weatherIcon = ("<img src='https://openweathermap.org/img/w/" + details.weather[0].icon + ".png' alt='" + details.weather[0].main + "' />")
-                    console.log (weatherIcon);
+                    //console.log (weatherIcon);
 
                     displayRecords (details.name, details.main.temp, details.main.humidity, details.wind.speed, weatherIcon);
-                    getUVIndexData (details.coord.lat, details.coord.lon)
+                    getUVIndexData (details.coord.lat, details.coord.lon);
+                    getFutureCityData (details.name, details.sys.country);
                 })
             }
         })
@@ -73,7 +75,7 @@ var saveCity = function (city) {
     //debugger;
     } else {
         var existing = localStorage.getItem ("Cities");
-        console.log (existing);
+        //console.log (existing);
             if (existing === null) {
                 cityList = [];
             } else {
@@ -92,13 +94,13 @@ var saveCity = function (city) {
 // Function to get the UVIndex Data
 var getUVIndexData = function (lat, lon) {
     var oneCallAPI = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude=daily&appid=" + APIkey;
-    console.log (oneCallAPI);
+    //console.log (oneCallAPI);
     //debugger;
     fetch (oneCallAPI)
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function (details){
-                    console.log (details.current.uvi);// uvi
+                    //console.log (details.current.uvi);// uvi
                     displayUVIndexData (details.current.uvi)
                 })
             }
@@ -135,6 +137,54 @@ var displayUVIndexData = function (uvi) {
 
 
 // Create a function to display 5 day forecast similar to previous functions but miniaturaized!!!!!!!!!
+
+var getFutureCityData = function(city, country) {
+    // api to get data by city for 5 days every three hours 
+    var futureWeatherAPI = "https://api.openweathermap.org/data/2.5/forecast?q="+ city + "," +country+"&units=metric&appid="+ APIkey;
+    // array positions to be used for once a day (0 (one day) ,8 (two day),16 (three day),24 (four day),32 (fifth day))
+    console.log (futureWeatherAPI);
+    fetch (futureWeatherAPI)
+        .then(function(response) {
+            if (response.ok) {
+                response.json().then(function (details){
+                    // one day in the future
+                    console.log (details.list[0].dt_txt);
+                    console.log (details.list[0].main.temp);
+                    console.log (details.list[0].main.humidity);
+                    var weatherIcon = ("<img src='https://openweathermap.org/img/w/" + details.list[0].weather[0].icon + ".png' alt='" + details.list[0].weather[0].main + "' />")
+                    console.log (weatherIcon);
+                    // two days in the future
+                    console.log (details.list[8].dt_txt);
+                    console.log (details.list[8].main.temp);
+                    console.log (details.list[8].main.humidity);
+                    var weatherIcon = ("<img src='https://openweathermap.org/img/w/" + details.list[8].weather[0].icon + ".png' alt='" + details.list[8].weather[0].main + "' />")
+                    console.log (weatherIcon);
+                    // three days in the future
+                    console.log (details.list[16].dt_txt);
+                    console.log (details.list[16].main.temp);
+                    console.log (details.list[16].main.humidity);
+                    var weatherIcon = ("<img src='https://openweathermap.org/img/w/" + details.list[16].weather[0].icon + ".png' alt='" + details.list[16].weather[0].main + "' />")
+                    console.log (weatherIcon);
+                    // four days in the future
+                    console.log (details.list[24].dt_txt);
+                    console.log (details.list[24].main.temp);
+                    console.log (details.list[24].main.humidity);
+                    var weatherIcon = ("<img src='https://openweathermap.org/img/w/" + details.list[24].weather[0].icon + ".png' alt='" + details.list[24].weather[0].main + "' />")
+                    console.log (weatherIcon);
+                    // five days in the future
+                    console.log (details.list[32].dt_txt);
+                    console.log (details.list[32].main.temp);
+                    console.log (details.list[32].main.humidity);
+                    var weatherIcon = ("<img src='https://openweathermap.org/img/w/" + details.list[32].weather[0].icon + ".png' alt='" + details.list[32].weather[0].main + "' />")
+                    console.log (weatherIcon);
+                })
+            }
+        })
+        .catch(function(error) {
+            alert("Unable to connect");
+        })
+//     
+}
 //Create function to click on existing list to display data again !!!!!!!!!!!!!
 
 
@@ -148,5 +198,5 @@ var displayUVIndexData = function (uvi) {
 
 //Event Listeners and calling Functions 
 searchCityButton.addEventListener("click",getCityData);
-// searchCityButton.addEventListener("click",getUVIndexData);
+//searchCityButton.addEventListener("click",getFutureCityData);
 existingList ();
