@@ -30,8 +30,10 @@ var getCityData = function() {
                     console.log (details.main.temp); //current temperature
                     console.log (details.main.humidity);//current Humidity
                     console.log (details.wind.speed); //current Wind Speed
+                    var weatherIcon = ("<img src='https://openweathermap.org/img/w/" + details.weather[0].icon + ".png' alt='" + details.weather[0].main + "' />")
+                    console.log (weatherIcon);
 
-                    displayRecords (details.name, details.main.temp, details.main.humidity, details.wind.speed);
+                    displayRecords (details.name, details.main.temp, details.main.humidity, details.wind.speed, weatherIcon);
                 })
             }
         })
@@ -42,14 +44,16 @@ var getCityData = function() {
 
 //create a function to display the records 
 
-var displayRecords = function(name,temp,humidity,windSpeed){
-    currentCity.innerHTML = (name);
-    currentTemperature.innerHTML = "Temperature: " + (temp) + " " + "degrees celsius";
-    currentHumidity.innerHTML = "Humidity: " + (humidity);
-    currentWS.innerHTML = "Wind Speed: " + (windSpeed);
+var displayRecords = function(name,temp,humidity,windSpeed,weatherIcon){
+    var currentDate = moment().format("MMM Do YYYY");
+    currentCity.innerHTML = (name) + " - " + (currentDate) + " " + (weatherIcon);
+    currentTemperature.innerHTML = "Temperature: " + (temp) + " " + "°C";
+    currentHumidity.innerHTML = "Humidity: " + (humidity)+ " " + "%";
+    currentWS.innerHTML = "Wind Speed: " + (windSpeed)+ " " + "Km/h";
 }
 
 //create function to click on existing list to display data again
+
 
 //Function to load and display existing city names
 var existingList = function () {
