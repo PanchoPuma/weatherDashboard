@@ -34,6 +34,7 @@ var existingList = function () {
         previousSearchHistory.appendChild(cityButtonLoading);
 
         }
+        previousSearchHistory.addEventListener("click", (reinserting));
     }
 }
 
@@ -215,9 +216,16 @@ var clearListData = function(){
 
 
 
-//Create function to click on existing list to display data again !!!!!!!!!!!!!
-//take a look at JS quiz homework
+//Function to click on existing list to display data again 
 
+var reinserting = function (event){
+    event.preventDefault();
+    var compare = event.target;
+        if (compare.matches("button.list-group-item")) {
+            console.log (compare.id)
+            searchCityForm.value = JSON.parse(compare.id)
+            getCityData()
+}}
 
 
 //Event Listeners and calling Functions 
