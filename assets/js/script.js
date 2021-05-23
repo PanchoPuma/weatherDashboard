@@ -29,7 +29,7 @@ var existingList = function () {
 
         var cityButtonLoading = document.createElement("button");
         cityButtonLoading.textContent = (storedCityList[i]);
-        cityButtonLoading.className = "my-1"
+        cityButtonLoading.className = "list-group-item"
         cityButtonLoading.id = JSON.stringify(storedCityList[i]);
         previousSearchHistory.appendChild(cityButtonLoading);
 
@@ -40,7 +40,7 @@ var existingList = function () {
 //Function to get city data
 var getCityData = function() {
     var city = $("#searchCityForm").val();
-
+    event.preventDefault ();
     saveCity(city);
 
     var openWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q="+ city +"&units=metric&exclude=daily&appid="+ APIkey
@@ -89,7 +89,7 @@ var saveCity = function (city) {
             var cityButtonSaving = document.createElement("button");
             cityButtonSaving.textContent = (city);
             cityButtonSaving.id = JSON.stringify(city);
-            cityButtonSaving.className = "my-1"
+            cityButtonSaving.className = " list-group-item"
             previousSearchHistory.appendChild(cityButtonSaving);
     }
 }
@@ -224,9 +224,9 @@ var clearListData = function(){
 // });
 
 
-$(".list-group").click(function (){
-    console.log(this.id)
-})
+// $(".list-group-item").click(function (){
+//     console.log(this.id)
+// })
 
 
 
@@ -235,3 +235,9 @@ $(".list-group").click(function (){
 searchCityButton.addEventListener("click",getCityData);
 clearCityButton.addEventListener("click",clearListData);
 existingList ();
+
+searchCityForm.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        getCityData ()
+    }
+});
