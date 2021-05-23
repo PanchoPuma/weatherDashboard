@@ -6,6 +6,7 @@ var currentTemperature = document.querySelector("#currentTemperature");
 var currentHumidity = document.querySelector("#currentHumidity");
 var currentWS = document.querySelector("#currentWS");
 var uvIndex = document.querySelector("#uvIndex");
+var clearCityButton = document.querySelector("#clearCityButton");
 
 // variables
 var APIkey = "b1d0aae8e0d8743f9981d6a87d77d2bb";
@@ -201,14 +202,16 @@ var getFutureCityData = function(city, country) {
         })
         .catch(function(error) {
             alert("Unable to connect");
-        })
-//     
+        })   
 }
+
+//Function to Clear Existing List
+var clearListData = function(){
+    localStorage.clear();
+    $("#previousSearchHistory").empty();
+}
+
 //Create function to click on existing list to display data again !!!!!!!!!!!!!
-
-
-
-
 
 
 
@@ -217,5 +220,5 @@ var getFutureCityData = function(city, country) {
 
 //Event Listeners and calling Functions 
 searchCityButton.addEventListener("click",getCityData);
-//searchCityButton.addEventListener("click",getFutureCityData);
+clearCityButton.addEventListener("click",clearListData);
 existingList ();
