@@ -213,21 +213,10 @@ var clearListData = function(){
     $("#previousSearchHistory").empty();
 }
 
+
+
 //Create function to click on existing list to display data again !!!!!!!!!!!!!
-
-// searchHistoryList.on("click","li.city-btn", function(event) {
-//     // console.log($(this).data("value"));
-//     var value = $(this).data("value");
-//     currentConditionsRequest(value);
-//     searchHistory(value); 
-
-// });
-
-
-// $(".list-group-item").click(function (){
-//     console.log(this.id)
-// })
-
+//take a look at JS quiz homework
 
 
 
