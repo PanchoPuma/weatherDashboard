@@ -8,18 +8,17 @@ var currentWS = document.querySelector("#currentWS");
 var uvIndex = document.querySelector("#uvIndex");
 var clearCityButton = document.querySelector("#clearCityButton");
 
-// variables
+// Running variables
 var APIkey = "b1d0aae8e0d8743f9981d6a87d77d2bb";
 var cityList = [];
+
 
 //ALL FUNCTIONS
 
 //Function to load and display existing city names
 var existingList = function () {
-
     var storedCityList = localStorage.getItem("Cities");
     storedCityList = JSON.parse(storedCityList);
-
    //console.log(storedCityList);
     //debugger;
 
@@ -140,8 +139,7 @@ var displayUVIndexData = function (uvi) {
 }
 
 
-// Create a function to display 5 day forecast similar to previous functions but miniaturaized!!!!!!!!!
-
+// Function to display 5 day forecast
 var getFutureCityData = function(city, country) {
     // api to get data by city for 5 days every three hours 
     var futureWeatherAPI = "https://api.openweathermap.org/data/2.5/forecast?q="+ city + "," +country+"&units=metric&appid="+ APIkey;
@@ -215,10 +213,7 @@ var clearListData = function(){
     $("#previousSearchHistory").empty();
 }
 
-
-
 //Function to click on existing list to display data again 
-
 var reinserting = function (event){
     event.preventDefault();
     var compare = event.target;
@@ -232,10 +227,9 @@ var reinserting = function (event){
 //Event Listeners and calling Functions 
 searchCityButton.addEventListener("click",getCityData);
 clearCityButton.addEventListener("click",clearListData);
-existingList ();
-
 searchCityForm.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         getCityData ()
     }
 });
+existingList ();
