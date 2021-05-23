@@ -30,7 +30,7 @@ var existingList = function () {
         var cityButtonLoading = document.createElement("button");
         cityButtonLoading.textContent = (storedCityList[i]);
         cityButtonLoading.className = "my-1"
-        cityButtonLoading.id = (storedCityList[i])
+        cityButtonLoading.id = JSON.stringify(storedCityList[i]);
         previousSearchHistory.appendChild(cityButtonLoading);
 
         }
@@ -88,6 +88,7 @@ var saveCity = function (city) {
             //debugger;
             var cityButtonSaving = document.createElement("button");
             cityButtonSaving.textContent = (city);
+            cityButtonSaving.id = JSON.stringify(city);
             cityButtonSaving.className = "my-1"
             previousSearchHistory.appendChild(cityButtonSaving);
     }
@@ -214,7 +215,18 @@ var clearListData = function(){
 
 //Create function to click on existing list to display data again !!!!!!!!!!!!!
 
+// searchHistoryList.on("click","li.city-btn", function(event) {
+//     // console.log($(this).data("value"));
+//     var value = $(this).data("value");
+//     currentConditionsRequest(value);
+//     searchHistory(value); 
 
+// });
+
+
+$(".list-group").click(function (){
+    console.log(this.id)
+})
 
 
 
