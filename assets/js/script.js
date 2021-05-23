@@ -30,6 +30,7 @@ var existingList = function () {
         var cityButtonLoading = document.createElement("button");
         cityButtonLoading.textContent = (storedCityList[i]);
         cityButtonLoading.className = "my-1"
+        cityButtonLoading.id = (storedCityList[i])
         previousSearchHistory.appendChild(cityButtonLoading);
 
         }
