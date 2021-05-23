@@ -150,36 +150,52 @@ var getFutureCityData = function(city, country) {
                 // one day in the future
                 var oneDay = moment(details.list[4].dt_txt).format('l');
                 $("#oneDayAhead").html(oneDay);
-                var weatherIcon1 = ("<img src='https://openweathermap.org/img/w/" + details.list[4].weather[0].icon + ".png' alt='" + details.list[4].weather[0].main + "' />")
+                var weatherIcon1 = ("<img src='https://openweathermap.org/img/w/" + details.list[4].weather[0].icon 
+                                    + ".png' alt='" + details.list[4].weather[0].main + "' />")
                 $("#oneDayAheadIcon").html(weatherIcon1);
                 $("#oneDayAheadTemp").html("Temp: " + details.list[4].main.temp + "°C");
                 $("#oneDayAheadWind").html("Wind: " + details.list[4].wind.speed + "Km/h");
                 $("#oneDayAheadHumidity").html("Humidity: " + details.list[4].main.humidity + "%");
                 
                 // two days in the future
-
+                var twoDay = moment(details.list[12].dt_txt).format('l');
+                $("#twoDayAhead").html(twoDay);
+                var weatherIcon2 = ("<img src='https://openweathermap.org/img/w/" + details.list[12].weather[0].icon 
+                                    + ".png' alt='" + details.list[12].weather[0].main + "' />")
+                $("#twoDayAheadIcon").html(weatherIcon2);
+                $("#twoDayAheadTemp").html("Temp: " + details.list[12].main.temp + "°C");
+                $("#twoDayAheadWind").html("Wind: " + details.list[12].wind.speed + "Km/h");
+                $("#twoDayAheadHumidity").html("Humidity: " + details.list[12].main.humidity + "%");
 
                 // three days in the future
-
+                var threeDay = moment(details.list[20].dt_txt).format('l');
+                $("#threeDayAhead").html(threeDay);
+                var weatherIcon3 = ("<img src='https://openweathermap.org/img/w/" + details.list[20].weather[0].icon 
+                                    + ".png' alt='" + details.list[20].weather[0].main + "' />")
+                $("#threeDayAheadIcon").html(weatherIcon3);
+                $("#threeDayAheadTemp").html("Temp: " + details.list[20].main.temp + "°C");
+                $("#threeDayAheadWind").html("Wind: " + details.list[20].wind.speed + "Km/h");
+                $("#threeDayAheadHumidity").html("Humidity: " + details.list[20].main.humidity + "%");
 
                 // four days in the future
-
+                var fourDay = moment(details.list[28].dt_txt).format('l');
+                $("#fourDayAhead").html(fourDay);
+                var weatherIcon4 = ("<img src='https://openweathermap.org/img/w/" + details.list[28].weather[0].icon 
+                                    + ".png' alt='" + details.list[28].weather[0].main + "' />")
+                $("#fourDayAheadIcon").html(weatherIcon4);
+                $("#fourDayAheadTemp").html("Temp: " + details.list[28].main.temp + "°C");
+                $("#fourDayAheadWind").html("Wind: " + details.list[28].wind.speed + "Km/h");
+                $("#fourDayAheadHumidity").html("Humidity: " + details.list[28].main.humidity + "%");
 
                 // five days in the future
-
-
-
-
-
-                //sample consol log
-                    // one day in the future
-                    // var oneDay = moment().add(1, 'days').calendar("MMM Do YYYY");
-                    //     //console.log (oneDay);
-                    // console.log (details.list[0].dt_txt);
-                    // console.log (details.list[0].main.temp);
-                    // console.log (details.list[0].main.humidity);
-                    // var weatherIcon = ("<img src='https://openweathermap.org/img/w/" + details.list[0].weather[0].icon + ".png' alt='" + details.list[0].weather[0].main + "' />")
-                    // console.log (weatherIcon);
+                var fiveDay = moment(details.list[36].dt_txt).format('l');
+                $("#fiveDayAhead").html(fiveDay);
+                var weatherIcon5 = ("<img src='https://openweathermap.org/img/w/" + details.list[36].weather[0].icon 
+                                    + ".png' alt='" + details.list[36].weather[0].main + "' />")
+                $("#fiveDayAheadIcon").html(weatherIcon5);
+                $("#fiveDayAheadTemp").html("Temp: " + details.list[36].main.temp + "°C");
+                $("#fiveDayAheadWind").html("Wind: " + details.list[36].wind.speed + "Km/h");
+                $("#fiveDayAheadHumidity").html("Humidity: " + details.list[36].main.humidity + "%");
                 })
             }
         })
