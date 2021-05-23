@@ -141,20 +141,20 @@ var displayUVIndexData = function (uvi) {
 var getFutureCityData = function(city, country) {
     // api to get data by city for 5 days every three hours 
     var futureWeatherAPI = "https://api.openweathermap.org/data/2.5/forecast?q="+ city + "," +country+"&units=metric&appid="+ APIkey;
-    // array positions to be used for once a day (0 (one day) ,8 (two day),16 (three day),24 (four day),32 (fifth day))
+    // array positions to be used for once a day at noon: (4 (one day) ,12 (two day),20 (three day),28 (four day),36 (fifth day))
     console.log (futureWeatherAPI);
     fetch (futureWeatherAPI)
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function (details){
                 // one day in the future
-                var oneDay = moment(details.list[0].dt_txt).format('l');
+                var oneDay = moment(details.list[4].dt_txt).format('l');
                 $("#oneDayAhead").html(oneDay);
-                var weatherIcon1 = ("<img src='https://openweathermap.org/img/w/" + details.list[0].weather[0].icon + ".png' alt='" + details.list[0].weather[0].main + "' />")
+                var weatherIcon1 = ("<img src='https://openweathermap.org/img/w/" + details.list[4].weather[0].icon + ".png' alt='" + details.list[4].weather[0].main + "' />")
                 $("#oneDayAheadIcon").html(weatherIcon1);
-                $("#oneDayAheadTemp").html("Temperature: " + details.list[0].main.temp + "°C");
-                $("#oneDayAheadWind").html("Wind: " + details.list[0].wind.speed + "Km/h");
-                $("#oneDayAheadHumidity").html("Humidity: " + details.list[0].main.humidity + "%");
+                $("#oneDayAheadTemp").html("Temp: " + details.list[4].main.temp + "°C");
+                $("#oneDayAheadWind").html("Wind: " + details.list[4].wind.speed + "Km/h");
+                $("#oneDayAheadHumidity").html("Humidity: " + details.list[4].main.humidity + "%");
                 
                 // two days in the future
 
@@ -167,7 +167,7 @@ var getFutureCityData = function(city, country) {
 
                 // five days in the future
 
-                
+
 
 
 
