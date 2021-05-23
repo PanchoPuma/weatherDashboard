@@ -147,36 +147,48 @@ var getFutureCityData = function(city, country) {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function (details){
+                // one day in the future
+                // two days in the future
+                // three days in the future
+                // four days in the future
+                // five days in the future
+
+
+
+                //sample consol log
                     // one day in the future
-                    console.log (details.list[0].dt_txt);
+                    var oneDay = moment().add(1, 'days').calendar("MMM Do YYYY");
+                        //console.log (oneDay);
                     console.log (details.list[0].main.temp);
                     console.log (details.list[0].main.humidity);
                     var weatherIcon = ("<img src='https://openweathermap.org/img/w/" + details.list[0].weather[0].icon + ".png' alt='" + details.list[0].weather[0].main + "' />")
                     console.log (weatherIcon);
                     // two days in the future
-                    console.log (details.list[8].dt_txt);
+                    var twoDays = moment().add(2, 'days').calendar("MMM Do YYYY");
                     console.log (details.list[8].main.temp);
                     console.log (details.list[8].main.humidity);
                     var weatherIcon = ("<img src='https://openweathermap.org/img/w/" + details.list[8].weather[0].icon + ".png' alt='" + details.list[8].weather[0].main + "' />")
                     console.log (weatherIcon);
                     // three days in the future
-                    console.log (details.list[16].dt_txt);
+                    var threeDays = moment().add(3, 'days').calendar("MMM Do YYYY");
                     console.log (details.list[16].main.temp);
                     console.log (details.list[16].main.humidity);
                     var weatherIcon = ("<img src='https://openweathermap.org/img/w/" + details.list[16].weather[0].icon + ".png' alt='" + details.list[16].weather[0].main + "' />")
                     console.log (weatherIcon);
                     // four days in the future
-                    console.log (details.list[24].dt_txt);
+                    var fourDays = moment().add(4, 'days').calendar("MMM Do YYYY");
                     console.log (details.list[24].main.temp);
                     console.log (details.list[24].main.humidity);
                     var weatherIcon = ("<img src='https://openweathermap.org/img/w/" + details.list[24].weather[0].icon + ".png' alt='" + details.list[24].weather[0].main + "' />")
                     console.log (weatherIcon);
                     // five days in the future
-                    console.log (details.list[32].dt_txt);
+                    var fiveDays = moment().add(5, 'days').calendar("MMM Do YYYY");
                     console.log (details.list[32].main.temp);
                     console.log (details.list[32].main.humidity);
                     var weatherIcon = ("<img src='https://openweathermap.org/img/w/" + details.list[32].weather[0].icon + ".png' alt='" + details.list[32].weather[0].main + "' />")
                     console.log (weatherIcon);
+
+
                 })
             }
         })
